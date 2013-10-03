@@ -1,0 +1,273 @@
+<?php if(!Mage::getModel('core/cookie')->get('modalmpc') && ($this->getRequest()->getParam('utm_content') == 'modal1' || $this->getRequest()->getParam('utm_content') == 'modal2' || $this->getRequest()->getParam('utm_content') == 'modal3' || $this->getRequest()->getParam('utm_content') == 'modal4')): ?>
+
+<?php 
+    var_dump($this->getRequest()->getParam('utm_source'));
+    var_dump($this->getRequest()->getParam('utm_content'));
+?>
+
+<style type="text/css">
+#overlay
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+	z-index: 100000000;
+	display: none;
+}
+#modal-promo
+{
+	width: 550px;
+    height: 550px;
+	position: absolute;
+	background: #FFFFFF;
+	/*border: 1px solid #DDDDDD;*/
+    <?php if($this->getRequest()->getParam('utm_content') == 'modal1'): ?>
+    background: url('<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/fundo_modal1.png'; ?>') no-repeat;
+    <?php elseif($this->getRequest()->getParam('utm_content') == 'modal2'): ?>
+    background: url('<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/fundo_modal2.png'; ?>') no-repeat;
+    <?php elseif($this->getRequest()->getParam('utm_content') == 'modal3'): ?>
+    background: url('<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/fundo_modal3.png'; ?>') no-repeat;
+    <?php else: ?>
+    background: url('<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/fundo_modal4.png'; ?>') no-repeat;
+    <?php endif; ?>
+	/*+border-radius:5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;*/
+	z-index: 999999999;
+    margin-left: -275px;
+    color: #000;
+	top: 0;
+	left: 50%;
+	/*display: none;*/
+    font-family: "Century Gothic" century;
+}
+#btn-fechar-modal, #btn-fechar-modal2
+{
+    /*position: absolute;
+    right: 35px;
+    top: 5px;*/
+    position: fixed;
+    right: 35px;
+    top: 65px;
+    float: left;
+    height: 22px;
+    display: block;
+    padding: 3px 12px 0px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 30px;
+    color: #FFF;
+    cursor: pointer;
+}
+.obs {
+    font-size: 11px;
+    text-align: center;
+    width: 325px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    font-weight: bold;
+    position: absolute;
+    bottom: 45px;
+    left: 112px;
+}
+#modal-email {
+    width: 400px;
+    padding: 5px;
+    /*+border-radius:5px;*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+    font: 14px / 1.5 "Century Gothic" century;
+    position: absolute;
+    left: 70px;
+    <?php if(Mage::getStoreConfig('autocoupons/config/textobs')): ?>
+    top: 365px;
+    <?php else: ?>
+    top: 385px;
+    <?php endif; ?>
+    color: #000000;
+}
+#do-modal {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 65px;
+    <?php if(Mage::getStoreConfig('autocoupons/config/textobs')): ?>
+    top: 410px;
+    <?php else: ?>
+    top: 430px;
+    <?php endif; ?>
+}
+.content-before, .content-after {
+    width: 100%;
+    padding: 30px 0 30px 0;
+    margin: 0;
+}
+.success-modal {
+    background: url('<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/poupup_apos.png'; ?>') no-repeat !important;
+}
+
+@font-face {
+    font-family: 'century';
+    src: url('gothic-webfont.eot');
+    src: url('gothic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('gothic-webfont.woff') format('woff'),
+         url('gothic-webfont.ttf') format('truetype'),
+         url('gothic-webfont.svg#century_gothicregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.title-modal {
+    font-size: 48px;
+    font-weight: bold;
+    position: absolute;
+    right: 93px;
+    top: 54px;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+.body-modal {
+    font-size: 26px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 90px;
+    top: 115px;
+    text-align: right;
+    line-height: 1.2;
+}
+</style>
+
+<div id="modal-promo">
+    <div class="content-before">
+        <p id="btn-fechar-modal">X</p>
+        <p class="title-modal">Parabéns!</p>
+        <p class="body-modal">Você ganhou 20,00<br /> de Desconto</p>
+        <input id="modal-email" name="email" placeholder="Insira seu e-mail e receba o cupom" />
+        <button id="do-modal"><img src="<?php echo Mage::getBaseUrl() . 'skin/frontend/default/default/images/autocoupons/botao.png'; ?>" alt="Cadastre-se"/></button>
+        <?php if(Mage::getStoreConfig('autocoupons/config/textobs')): ?>
+            <p class="obs"><?php echo Mage::getStoreConfig('autocoupons/config/textobs'); ?></p>
+        <?php endif; ?>
+    </div>
+    <div class="content-after">
+        <p id="btn-fechar-modal2">X</p>
+    </div>
+</div>
+
+<div id="overlay" style="display: none;">
+
+</div>
+
+<script type="text/javascript">
+    controleModal = 0;
+
+    doModal = function() {
+        controleModal = 1;
+        //var screensize = $j(window).width();
+        //var ajuste = (screensize - $j('#modal-promo').width())/2;
+        var offSet = $j(window).scrollTop() + 70;
+        $j('#overlay').fadeIn(function() {
+            $j('#modal-promo').css({"top":offSet+"px"});
+            $j('#modal-promo').fadeIn();
+        });
+    }
+    
+    function IsEmail(email) {
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+
+    $j(document).ready(function() {
+        
+        /*$j(window).bind("resize", function(){
+            var screensize = $j(window).width();
+            var ajuste = (screensize - $j('#modal-promo').width())/2;
+            
+            if(controleModal == 1) {
+                $j('#modal-promo').css({"margin-left":(ajuste-32)+"px","margin-right":(ajuste+32)+"px"});
+            }
+        });*/
+        
+        $j(window).bind("scroll",function(){
+            if(controleModal == 1) {
+                var offSet = $j(window).scrollTop() + 70;
+                $j('#modal-promo').css({"top":offSet+"px"});
+            }
+        });
+        
+        $j('#overlay').click(function() {
+            $j('#modal-promo').fadeOut(function(){
+                $j('#overlay').fadeOut();
+            });
+        });
+        
+        $j(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                $j('#modal-promo').fadeOut(function(){
+                    $j('#overlay').fadeOut();
+                });
+            }
+        });
+        
+        $j('#btn-fechar-modal, #btn-fechar-modal2').click(function() {
+            $j('#modal-promo').fadeOut(function(){
+                $j('#overlay').fadeOut();
+            });
+        });
+        
+        $j('#do-modal').click(function(){
+            var emailVal = $j('#modal-email').val();  
+            if(IsEmail(emailVal)) {
+                $j.ajax({
+                    url: "<?php echo Mage::getBaseUrl() . 'autocoupons/standard/generate' ?>",
+                    type: "post",
+                    data: { email: emailVal },
+                    success: function(resposta) {
+                        if(resposta == '1') {
+                            $j(".content-before").fadeOut(function() {
+                                $j("#modal-promo").addClass('success-modal');
+                                $j(".content-after").fadeIn();
+                            });
+                            setTimeout(function(){
+                                $j('#modal-promo').fadeOut(function(){
+                                    $j('#overlay').fadeOut();
+                                });
+                            },4500);
+                            _gaq.push(['_trackEvent', '<?php echo $this->getRequest()->getParam('utm_source'); ?>', '<?php echo $this->getRequest()->getParam('utm_campaign'); ?>', '<?php echo $this->getRequest()->getParam('utm_content'); ?>']);
+                        }
+                    },
+                    error: function() {
+                        //alert("error");
+                    }   
+                });
+            }
+            else {
+                $j('#modal-email').css({'background':'rgb(255, 174, 174)'});
+                setTimeout(function(){
+                    $j('#modal-email').val('');
+                    $j('#modal-email').css({'background':'#FFFFFF'});
+                },1500);
+            }
+        });
+                
+        doModal();
+        
+    });
+    
+</script>
+
+<?php endif; ?>
