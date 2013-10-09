@@ -18,7 +18,7 @@ Requerimentos
 - PHP 5.2.0 ou superior
 - jQuery > 1.7.x (não incluso no módulo)
 
-Observações
+Observações Importantes
 --------------
 
 - Esse módulo não é "Plug and Play". Você precisa modificar o arquivo modal.phtml de acordo com suas necessidades e instaciar o bloco, como por exemplo:
@@ -26,3 +26,11 @@ Observações
 
 - A URL que seu formulário deve fazer o POST com o email a receber o código do cupom é http://&lt;MagentoBaseUrl&gt;/autocoupons/standard/generate. Você pode utilizar qualquer formulário para ativar o disparo desde que o destino do post esteja correto.
 - O CSS e JS do modal foi feito inpage, no arquivo modal.phtml. Sabemos que essa não é a forma mais adequada mas foi utilizada para simplicar a edição do modal para outras lojas.
+
+Bugs?
+--------------
+Utilize o próprio GitHub para reportar problemas ou entre em contato comigo via email: denis dot spalenza (at) xpdev dot com dot br
+
+Licença
+--------------
+Todo commit desse repositório está sob a lincença OSL-3.0, veja VF_LICENSE.txt
