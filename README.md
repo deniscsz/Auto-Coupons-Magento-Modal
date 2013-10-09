@@ -22,8 +22,7 @@ Observações
 --------------
 
 - Esse módulo não é "Plug and Play". Você precisa modificar o arquivo modal.phtml de acordo com suas necessidades e instaciar o bloco, como por exemplo:
-
-    <block type="autocoupons/standard_modal" template="autocoupons/modal.phtml" name="autocoupons.modal" as="autocoupons_modal" />
+	<block type="autocoupons/standard_modal" template="autocoupons/modal.phtml" name="autocoupons.modal" as="autocoupons_modal" />;
 
 - A URL que seu formulário deve fazer o POST com o email a receber o código do cupom é http://<MagentoBaseUrl>/autocoupons/standard/generate. Você pode utilizar qualquer formulário para ativar o disparo desde que o destino do post esteja correto.
 - O CSS e JS do modal foi feito inpage, no arquivo modal.phtml. Sabemos que essa não é a forma mais adequada mas foi utilizada para simplicar a edição do modal para outras lojas.
